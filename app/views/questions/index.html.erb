@@ -1,0 +1,20 @@
+<h1>Questions </h1>
+<p><%= link_to "New question", new_question_path %></p>
+
+<table>
+<tr>
+    <th>Question</th>
+    <th>Prize</th>
+    <th>Response cost</th>
+    <th>Time remaining</th>
+
+</tr>
+    <% @questions.each do |question|%>
+    <tr>
+        <td><%= question.title %> </td>
+        <td><%= question.prize %> </td>
+        <td><%= question.response_cost %> </td>
+    </tr>
+    <% end %>
+
+</table>
