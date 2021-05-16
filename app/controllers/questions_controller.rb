@@ -14,21 +14,28 @@ class QuestionsController < ApplicationController
     end
     
     def create
-        @question = Question.create(question_params)
-        redirect_to @question
+        @question = Question.new(question_params)
+        if @question.save
+            redirect_to @question
+        else
+            flash.now[:errors] = @question.errors.full_messages
+            render action: 'new'
+        end
     end
 
+   
+    def destroy
+        @question.destroy
+        redirect_to root_path
+    end
+
+    private
     def set_questions
         @questions = Question.all
     end
 
     def set_question 
         @question = Question.find(params[:id])
-    end
-
-    def destroy
-        @question.destroy
-        redirect_to root_path
     end
 
     def question_params

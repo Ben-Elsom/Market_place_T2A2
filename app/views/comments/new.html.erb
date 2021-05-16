@@ -1,0 +1,8 @@
+<%= form_with model: @comment, local: true do |f| %>
+    <p>
+        <%= f.text_area :body, placeholder: "What are your thoughts?" %>
+    </p>
+    <p>
+        <%= f.submit%>
+    </p>
+<% end %>
