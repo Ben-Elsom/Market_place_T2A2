@@ -11,6 +11,13 @@
   </head>
 
   <body>
+  <h3><%= link_to "Home", root_path %></h3>
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

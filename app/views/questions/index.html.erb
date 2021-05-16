@@ -2,19 +2,22 @@
 <p><%= link_to "New question", new_question_path %></p>
 
 <table>
-<tr>
-    <th>Question</th>
-    <th>Prize</th>
-    <th>Response cost</th>
-    <th>Time remaining</th>
-
-</tr>
-    <% @questions.each do |question|%>
     <tr>
-        <td><%= question.title %> </td>
-        <td><%= question.prize %> </td>
-        <td><%= question.response_cost %> </td>
+        <th>Question</th>
+        <th>Prize</th>
+        <th>Response cost</th>
+        <th>Time remaining</th>
+        <th>Actions</th>
+
     </tr>
-    <% end %>
+        <% @questions.each do |question|%>
+        <tr>
+            <td><%= link_to question.title, question_path(question) %> </td>
+            <td><%= question.prize %> </td>
+            <td><%= question.response_cost %> </td>
+            <td> Time to be added</td> 
+            <td><%= link_to "Delete", question_path(question), method: :delete, data: {confirm: "are you sure"}%></td>
+        </tr>
+        <% end %>
 
 </table>
