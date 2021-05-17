@@ -13,7 +13,11 @@
     </p>
     <p>
         <%= f.label :response_cost %>
-        <%= f.number_field :response_cost, step: 0.50 %>        
+        <%= f.number_field :response_cost, step: 0.10 %>        
+    </p>
+    <p>
+        <%= f.label "closing date and time" %>
+        <%= f.datetime_local_field :closing_date_and_time %>    
     </p>
     <p>
         <%= f.submit %>

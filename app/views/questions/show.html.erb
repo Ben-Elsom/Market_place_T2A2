@@ -7,7 +7,9 @@
 |
 <%= @question.response_cost %> 
 </div>
-<p><strong> Date to be added </strong></p> 
+<p><%=@question.closing_date_and_time%></p>
+<% date = @question.closing_date_and_time - DateTime.now%>
+<%= date/60/60 %>
 
 <%= form_with model: @comment, local: true do |f| %>
     <%= f.hidden_field :question_id, value: @question.id %>

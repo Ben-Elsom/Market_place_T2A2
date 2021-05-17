@@ -6,5 +6,10 @@ require "date"
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Comment.destroy_all
 Question.destroy_all
-Question.create(title:"This is a question", description: "This is the description", prize: 2, response_cost: 0.1)
+date = DateTime.now + 1.day
+
+question1 = Question.create(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 0.10, closing_date_and_time: date)
+
+Comment.create(body: "I think you should call it 'fast flowers'", question: question1)
