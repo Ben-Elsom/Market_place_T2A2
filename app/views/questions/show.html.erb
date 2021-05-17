@@ -1,9 +1,7 @@
 <h1>Show page</h1>
 
-
-
-<%= @question.title %>
-<%= @question.description  %>
+<p><%= @question.title %></p>
+<p><%= @question.description  %></p>
 <div>
 <%= @question.prize %> 
 |
@@ -11,3 +9,13 @@
 </div>
 <p><strong> Date to be added </strong></p> 
 
+<%= form_with model: @comment, local: true do |f| %>
+    <%= f.hidden_field :question_id, value: @question.id %>
+    <%= f.text_area :body, placeholder: "add a comment" %>
+
+    <%= f.submit %>
+<% end %>
+
+<% @question.comments.each do |comment| %>
+    <p><%= comment.body %></p>
+<% end %>

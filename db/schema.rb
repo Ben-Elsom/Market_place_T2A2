@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_054101) do
+ActiveRecord::Schema.define(version: 2021_05_17_014522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_comments_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -41,4 +44,5 @@ ActiveRecord::Schema.define(version: 2021_05_16_054101) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "questions"
 end

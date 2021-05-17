@@ -5,8 +5,9 @@ class QuestionsController < ApplicationController
         
     end
 
-    def show 
-
+    def show      
+        
+        @comment = Comment.new
     end
 
     def new
@@ -19,7 +20,7 @@ class QuestionsController < ApplicationController
             redirect_to @question
         else
             flash.now[:errors] = @question.errors.full_messages
-            render action: 'new'
+            render action: 'show'
         end
     end
 

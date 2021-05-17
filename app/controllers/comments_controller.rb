@@ -1,14 +1,19 @@
 class CommentsController < ApplicationController
-    def new
-        @comment = Comment.new
-    end
+
 
     def create
-        Comment.create(comment_params)
+        @comment = Comment.new(comment_params)
+        if @comment.save 
+            redirect_to question_path(@comment.question_id)
+        else 
+            flash.now[:errors] = @comment.errors.full_messages
+            @question = Question.find(params[:comment][:question_id])
+            render "questions/show"
+        end
     end
 
     def comment_params
-        params.require(:comment).permit(:body)
+        params.require(:comment).permit(:body, :question_id)
     end
 
 end
