@@ -7,9 +7,8 @@
 |
 <%= @question.response_cost %> 
 </div>
-<p><%=@question.closing_date_and_time%></p>
 <% date = @question.closing_date_and_time - DateTime.now%>
-<%= date/60/60 %>
+<strong>Time remaining:</strong><%= date/60/60 %>
 
 <%= form_with model: @comment, local: true do |f| %>
     <%= f.hidden_field :question_id, value: @question.id %>
@@ -20,4 +19,5 @@
 
 <% @question.comments.each do |comment| %>
     <p><%= comment.body %></p>
+    <h5><%= link_to "Delete", comment_path(comment), method: :delete%></h5>
 <% end %>

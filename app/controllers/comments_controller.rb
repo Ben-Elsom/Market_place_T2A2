@@ -1,6 +1,4 @@
 class CommentsController < ApplicationController
-
-
     def create
         @comment = Comment.new(comment_params)
         if @comment.save 
@@ -14,6 +12,11 @@ class CommentsController < ApplicationController
 
     def comment_params
         params.require(:comment).permit(:body, :question_id)
+    end
+
+    def destroy 
+        @comment = Comment.find(params[:id])
+        @comment.destroy
     end
 
 end
