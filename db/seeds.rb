@@ -8,7 +8,7 @@ require "date"
 #   Character.create(name: 'Luke', movie: movies.first)
 Comment.destroy_all
 Question.destroy_all
-date = DateTime.now + 1.day
+date = DateTime.now - 1.day
 date2 = DateTime.now + 2.day
 date3 = DateTime.now + 3.day
 date4 = DateTime.now + 4.day

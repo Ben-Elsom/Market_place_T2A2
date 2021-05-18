@@ -2,10 +2,14 @@ class QuestionsController < ApplicationController
     before_action :set_questions, only: [:index, :new]
     before_action :set_question, only: [:show, :destroy]
     def index
-        
+        @questions.each do |question|
+            question.check_if_active?
+        end
+        @questions = Question.where(active: "true")
     end
 
     def show      
+        
         @comment = Comment.new
     end
 
