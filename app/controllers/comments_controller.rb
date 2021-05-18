@@ -10,6 +10,11 @@ class CommentsController < ApplicationController
         end
     end
 
+    def like 
+        Like.create(user_id: current_user.id, post_id: @post.id)
+        redirect_to questions_path(@post)
+    end
+    
     def comment_params
         params.require(:comment).permit(:body, :question_id)
     end
@@ -17,6 +22,6 @@ class CommentsController < ApplicationController
     def destroy 
         @comment = Comment.find(params[:id])
         @comment.destroy
+        redirect_back(fallback_location: root_path)
     end
-
 end

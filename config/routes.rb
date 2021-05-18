@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root to: 'questions#index'
   resources :questions
   resources :comments
+  put '/comments/:id/like', to: 'comments#like', as: 'like'
 end

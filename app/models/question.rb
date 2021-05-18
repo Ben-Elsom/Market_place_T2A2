@@ -3,6 +3,7 @@ class Question < ApplicationRecord
     validates :prize, presence: true
     validates :response_cost, presence: true
     has_many :comments, dependent: :destroy 
+   
 
     def check_if_active?
         if self.closing_date_and_time < DateTime.now 
@@ -13,4 +14,5 @@ class Question < ApplicationRecord
             return true 
         end
     end
+  
 end

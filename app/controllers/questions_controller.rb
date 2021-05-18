@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-    before_action :set_questions, only: [:index, :new]
+    before_action :set_questions, only: [:index, :new, :like]
     before_action :set_question, only: [:show, :destroy]
     def index
         @questions.each do |question|
@@ -8,8 +8,7 @@ class QuestionsController < ApplicationController
         @questions = Question.where(active: "true")
     end
 
-    def show      
-        
+    def show     
         @comment = Comment.new
     end
 
@@ -32,6 +31,7 @@ class QuestionsController < ApplicationController
         @question.destroy
         redirect_to root_path
     end
+
 
     private
     def set_questions
