@@ -10,6 +10,9 @@
         </div>
     </div>
     <%= link_to "Delete", question_path(question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %>
+    <% %>
+
+    <p>Responses</p>
 <% end %>
 
-
+<%# <%=Comment.count.where(question_id == question.id)%> %>

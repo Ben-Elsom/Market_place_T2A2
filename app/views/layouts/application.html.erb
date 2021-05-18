@@ -10,7 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="container">
+  <body class="container db-flex">
     <h1><%= link_to "Home", root_path %></h1>
     <% if current_user %>
       <%= current_user.email %>

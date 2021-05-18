@@ -7,8 +7,8 @@
 |
 <%= @question.response_cost %> 
 </div>
-<% date = @question.closing_date_and_time - DateTime.now%>
-<strong>Time remaining:</strong><%= date/60/60 %>
+<% time_remaining = @question.closing_date_and_time - DateTime.now%>
+<strong>Time remaining: </strong><%= ActiveSupport::Duration.build(time_remaining.round).inspect %>
 
 <%= form_with model: @comment, local: true do |f| %>
     <%= f.hidden_field :question_id, value: @question.id %>

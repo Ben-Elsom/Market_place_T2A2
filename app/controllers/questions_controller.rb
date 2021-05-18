@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
     end
 
     def show      
-        
         @comment = Comment.new
     end
 
