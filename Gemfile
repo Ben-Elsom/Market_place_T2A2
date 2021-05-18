@@ -59,4 +59,3 @@ gem "rolify", "~> 6.0"
 
 gem "devise", "~> 4.8"
 
-gem 'bootstrap-sass'
