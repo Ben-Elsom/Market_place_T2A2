@@ -20,13 +20,11 @@
 <% @question.comments.each do |comment| %>
     <%= comment.body %>
     <% if user_signed_in? %>
-        <%= button_to "asd", "/foooooo", method: "post" %>
         <% if comment.liked?(current_user) %>
-            <button style="background-color: blue;">Like</button>
+            <%= button_to "Like", like_path(comment), method: :post, disabled: true%>
         <% else %>
-            <button style="background-color: black;">Like</button>
-        <%end %>
+            <%= button_to "Like", like_path(comment), method: :post%>
+        <% end %>
     <% end %>
-        <%# <% if comment.liked?%> %>
     <h5><%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure you would like to delete this comment?"}%></h5>
 <% end %>
