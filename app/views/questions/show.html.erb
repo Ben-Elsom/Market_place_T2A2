@@ -18,7 +18,8 @@
 <% end %>
 
 <% @question.comments.each do |comment| %>
-    <%= comment.body %>
+    <p><%= comment.body %></p>
+   <%= pluralize(comment.likes.count, "like")%>
     <% if user_signed_in? %>
         <% if comment.liked?(current_user) %>
             <%= button_to "Like", like_path(comment), method: :post, disabled: true%>

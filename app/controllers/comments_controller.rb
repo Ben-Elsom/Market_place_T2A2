@@ -10,9 +10,9 @@ class CommentsController < ApplicationController
         end
     end
 
-    def like 
-        Like.create(user_id: current_user.id, post_id: @post.id)
-        redirect_to questions_path(@post)
+    def like
+        Like.create(user_id: current_user.id, comment_id: params[:id])
+        redirect_back(fallback_location: root_path)
     end
     
     def comment_params
