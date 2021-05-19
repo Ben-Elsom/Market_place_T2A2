@@ -1,25 +1,9 @@
-<%= form_with model: @question do |f| %>
-  <p>
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-    </p>
-    <p>
-        <%= f.label :description %>
-        <%= f.text_area :description %>
-    </p>
-    <p>
-        <%= f.label :prize %>
-        <%= f.number_field :prize, step: 0.50 %>
-    </p>
-    <p>
-        <%= f.label :response_cost %>
-        <%= f.number_field :response_cost, step: 0.10 %>        
-    </p>
-    <p>
-        <%= f.label "closing date and time" %>
-        <%= f.datetime_local_field :closing_date_and_time %>    
-    </p>
-    <p>
+<%= simple_form_for @question do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :prize %>
+        <%= f.input :response_cost%>        
+        <%= f.input :closing_date_and_time %>    
         <%= f.submit %>
-    </p>
 <% end %>
