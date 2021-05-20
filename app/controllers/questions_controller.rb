@@ -42,6 +42,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-        params.require(:question).permit(:title, :description, :prize, :response_cost, :closing_date_and_time )
+        params.require(:question).permit(:title, :description, :prize, :response_cost, :closing_date_and_time, :explaination_photo )
     end
 end

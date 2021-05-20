@@ -4,6 +4,7 @@ class Question < ApplicationRecord
     validates :response_cost, presence: true
     validates :closing_date_and_time, presence: true
     has_many :comments, dependent: :destroy 
+    has_one_attached :explaination_photo 
    
 
     def check_if_active?
