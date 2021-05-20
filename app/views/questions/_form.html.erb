@@ -1,5 +1,6 @@
 <%= simple_form_for @question do |f| %>
         <%= f.error_notification %>
+        <%= f.hidden_field :user, value: @current_user.id%>
         <%= f.input :title %>
         <%= f.input :description %>
         <%= f.input :prize %>
