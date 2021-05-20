@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
     def create
         @comment = Comment.new(comment_params)
+        @comment.user_id = current_user.id
         if @comment.save 
+            current_user.balance -= @comment.question.response_cost
+            current_user.save
             redirect_to question_path(@comment.question_id)
         else 
             flash.now[:errors] = @comment.errors.full_messages

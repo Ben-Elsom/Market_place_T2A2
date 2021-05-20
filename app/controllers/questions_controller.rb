@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
 
     def show     
         @comment = Comment.new
-    end
+    end 
 
     def new
         @question = Question.new
@@ -21,7 +21,8 @@ class QuestionsController < ApplicationController
         @question = Question.new(question_params)
         @question.user_id = current_user.id
         if @question.save
-            current_user.balance -= question_params[:prize]
+            current_user.balance -= question_params[:prize].to_i
+            current_user.save
             redirect_to @question
         else
             render action: 'new'
