@@ -65,3 +65,5 @@ gem "simple_form", "~> 5.1"
 gem "cloudinary", "~> 1.20"
 gem "activestorage-cloudinary-service", "~> 0.2.3"
 gem "dotenv-rails", "~> 2.7"
+
+gem "pundit", "~> 2.1"

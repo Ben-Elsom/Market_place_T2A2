@@ -12,7 +12,13 @@
 <% if @question.explaination_photo.attached? %>
     <p><%= cl_image_tag @question.explaination_photo.key, crop: :scale, width: 150, cloud_name: 'bene' %></p>
 <% end %>
-<p><%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
+
+
+
+<% if policy(Question).destroy? %>
+    <p><%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
+<% end %>
+
 
 <%= form_with model: @comment, local: true do |f| %>
     <%= f.hidden_field :question_id, value: @question.id %>
@@ -30,5 +36,7 @@
             <%= button_to "Like", like_path(comment), method: :post%>
         <% end %>
     <% end %>
-    <h5><%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure you would like to delete this comment?"}%></h5>
+    <% if policy(Comment).destroy? %>
+        <h5><%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure you would like to delete this comment?"}%></h5>
+    <% end %>
 <% end %>

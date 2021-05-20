@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+    before_action :authenticate_user!, except: [:index] 
+    before_action :check_auth, only: [:new, :create, :destroy]
     before_action :set_questions, only: [:index, :new, :like]
     before_action :set_question, only: [:show, :destroy]
     def index
@@ -47,5 +49,9 @@ class QuestionsController < ApplicationController
 
     def question_params
         params.require(:question).permit(:title, :description, :prize, :response_cost, :closing_date_and_time, :explaination_photo )
+    end
+
+    def check_auth
+        authorize Question
     end
 end

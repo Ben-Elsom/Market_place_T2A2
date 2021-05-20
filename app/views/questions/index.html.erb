@@ -1,5 +1,7 @@
 <h1>Questions </h1>
-<h2><%= link_to "New question", new_question_path %></h2>
+<% if user_signed_in? %>
+    <h2><%= link_to "New question", new_question_path %></h2>
+<% end %>
 
 <% @questions.each do |question|%>
     <div class="card" style="width: 18rem;">
@@ -8,7 +10,9 @@
             <h6 class="card-subtitle mb-2 text-muted"><%= question.prize %> | <%= question.response_cost %> </h6>
             <p class="card-text"><%= question.description %> </p>
             <%=Comment.where(question_id: question.id).count%> reponses
-            <p><%= link_to "Delete", question_path(question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
+            <% if user_signed_in? && policy(Question).destroy?%>
+                <p><%= link_to "Delete", question_path(question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
+            <% end %>
         </div>
     </div>
     
