@@ -6,11 +6,22 @@ require "date"
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+p "Before Delete"
+p User.count
+p Comment.count
+p Question.count
+p Like.count
 User.destroy_all
-Question.destroy_all
+Comment.destroy_all
+p "After Delete"
+p User.count
+p Question.count
+p Comment.count
+p Like.count
+
 
 date = DateTime.now - 1.day
-date2 = DateTime.now + 2.day
+date2 = DateTime.now + 1.day
 date3 = DateTime.now + 3.day
 date4 = DateTime.now + 4.day
 date5 = DateTime.now + 5.day
@@ -28,13 +39,13 @@ Comment.create(body: "'Speedy spuds'", question: question1, user: user2)
 
 question2 = Question.create(title:"What should I do for a hobby", description: " I am a 19 year old boy who has too much free time and want to know what would be the best hobby for me to get into. I want to impress girls and hopefully be able to earn money off of it one day. ", prize: 10, response_cost: 0.10, closing_date_and_time: date2, user: user)
 
-Comment.create(body: "Rock Climbing'", question: question2, user: user2)
-Comment.create(body: "'Memes lol'", question: question2, user: user2)
-Comment.create(body: "'Guitar'", question: question2, user: user2)
+Comment.create(body: "Rock Climbing", question: question2, user: user2)
+Comment.create(body: "Memes lol", question: question2, user: user2)
+Comment.create(body: "Guitar", question: question2, user: user2)
 
 question3 = Question.create(title:"What is your best pick up line", prize: 10, response_cost: 0.10, closing_date_and_time: date3, user: user)
 
-Comment.create(body: "Did it hurt? When you fell form heaven'", question: question3, user: user2)
+Comment.create(body: "Did it hurt? When you fell form heaven", question: question3, user: user2)
 Comment.create(body: "Baby you're the CSS to my HTML.", question: question3, user: user2)
 Comment.create(body: "My servers never go down... but I do.", question: question3, user: user2)
 
@@ -54,7 +65,7 @@ question6 = Question.create(title:"What should I name my child?", description: "
 
 Comment.create(body: "BabyMcBabyface", question: question6, user: user2)
 Comment.create(body: "Chelsey, I think it's beautiful name and is timeless", question: question6, user: user2)
-Comment.create(body: "Droptable", question: question6, user: user2)
+Comment.create(body: "Drop_table", question: question6, user: user2)
 Comment.create(body: "Latten", question: question6, user: user2)
 Comment.create(body: "Clementine", question: question6, user: user2)
 Comment.create(body: "Sulivan", question: question6, user: user2)

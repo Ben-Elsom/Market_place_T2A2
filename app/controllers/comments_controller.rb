@@ -16,11 +16,6 @@ class CommentsController < ApplicationController
             render "questions/show"
         end
     end
-
-    def like
-        Like.create(user_id: current_user.id, comment_id: params[:id])
-        redirect_back(fallback_location: root_path)
-    end
     
     def comment_params
         params.require(:comment).permit(:body, :question_id)

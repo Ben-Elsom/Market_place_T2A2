@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root to: 'questions#index'
   resources :questions
   resources :comments
-  post '/comments/:id/like', to: 'comments#like', as: 'like'
+  post '/comments/:id/like', to: 'likes#create', as: 'like'
+  delete '/comments/:id/like', to: 'likes#destroy'
 end

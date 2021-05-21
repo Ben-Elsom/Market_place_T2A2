@@ -31,7 +31,7 @@
    <%= pluralize(comment.likes.count, "like")%>
     <% if user_signed_in? %>
         <% if comment.liked?(current_user) %>
-            <%= button_to "Like", like_path(comment), method: :post, disabled: true%>
+            <%= button_to "Unlike", like_path(comment), method: :delete%>
         <% else %>
             <%= button_to "Like", like_path(comment), method: :post%>
         <% end %>
