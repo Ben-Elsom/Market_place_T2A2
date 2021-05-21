@@ -7,5 +7,6 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :comments, dependent: :destroy
+  validates :username, presence: true
   
 end

@@ -7,8 +7,8 @@ date4 = DateTime.now + 4.day
 date5 = DateTime.now + 5.day
 date6 = DateTime.now + 6.day
 
-user = User.create(email: "a@a.com", password: "123456", balance: 200)
-user2 = User.create(email: "a@b.com", password: "123456", balance: 200)
+user = User.create(email: "a@a.com", username: "test1", password: "123456", balance: 200)
+user2 = User.create(email: "a@b.com", username: "test2", password: "123456", balance: 200)
 
 question1 = Question.create(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 0.10, closing_date_and_time: date, user: user)
 
