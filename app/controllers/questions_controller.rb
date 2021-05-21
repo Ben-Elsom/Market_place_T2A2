@@ -36,6 +36,10 @@ class QuestionsController < ApplicationController
         @question.destroy
         redirect_to root_path
     end
+    
+    def update
+
+    end
 
 
     private

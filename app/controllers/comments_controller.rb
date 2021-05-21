@@ -2,13 +2,17 @@ class CommentsController < ApplicationController
     def create
         @comment = Comment.new(comment_params)
         @comment.user_id = current_user.id
+        @question = @comment.question
         if @comment.save 
             current_user.balance -= @comment.question.response_cost
-            current_user.save
-            redirect_to question_path(@comment.question_id)
+            current_user.save!
+            @question.prize += @question.response_cost
+            p @question
+            @question.save!
+
+            redirect_to question_path(@question)
         else 
             flash.now[:errors] = @comment.errors.full_messages
-            @question = Question.find(params[:comment][:question_id])
             render "questions/show"
         end
     end
@@ -27,4 +31,6 @@ class CommentsController < ApplicationController
         @comment.destroy
         redirect_back(fallback_location: root_path)
     end
+
+  
 end

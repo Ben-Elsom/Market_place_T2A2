@@ -3,7 +3,7 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
     create_table :questions do |t|
       t.string :title
       t.string :description
-      t.integer :prize
+      t.float :prize
       t.float :response_cost
 
       t.timestamps

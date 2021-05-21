@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     private
 
     def forbidden 
-        flash[:alert] = "You are not authorized to perfomr that action."
+        flash[:alert] = "You are not authorized to perform that action."
         redirect_back(fallback_location: root_path)
     end
 

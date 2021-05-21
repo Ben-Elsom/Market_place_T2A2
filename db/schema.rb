@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_100244) do
   create_table "questions", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "prize"
+    t.float "prize"
     t.float "response_cost"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
