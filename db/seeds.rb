@@ -1,24 +1,4 @@
-require "date"
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-p "Before Delete"
-p User.count
-p Comment.count
-p Question.count
-p Like.count
 User.destroy_all
-Comment.destroy_all
-p "After Delete"
-p User.count
-p Question.count
-p Comment.count
-p Like.count
-
 
 date = DateTime.now - 1.day
 date2 = DateTime.now + 1.day
@@ -27,8 +7,8 @@ date4 = DateTime.now + 4.day
 date5 = DateTime.now + 5.day
 date6 = DateTime.now + 6.day
 
-user = User.create(email: "a@a.com", password: "123456", balance: 1000)
-user2 = User.create(email: "a@b.com", password: "123456", balance: 1000)
+user = User.create(email: "a@a.com", password: "123456", balance: 200)
+user2 = User.create(email: "a@b.com", password: "123456", balance: 200)
 
 question1 = Question.create(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 0.10, closing_date_and_time: date, user: user)
 
