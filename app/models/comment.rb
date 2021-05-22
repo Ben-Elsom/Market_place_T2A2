@@ -4,6 +4,7 @@ class Comment < ApplicationRecord
   has_many :likes, dependent: :destroy
   belongs_to :user
   validate :has_enough_funds?
+  
 
   def liked?(user)
     !!self.likes.find{|like| like.user_id == user.id}
