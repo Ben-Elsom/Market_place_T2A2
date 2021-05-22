@@ -1,7 +1,7 @@
 User.destroy_all
 
-date = DateTime.now - 1.day
-date2 = DateTime.now + 1.day
+date = DateTime.now + 1.day
+date2 = DateTime.now + 1.minute
 date3 = DateTime.now + 3.day
 date4 = DateTime.now + 4.day
 date5 = DateTime.now + 5.day
@@ -10,7 +10,7 @@ date6 = DateTime.now + 6.day
 user = User.create(email: "a@a.com", username: "Ben Elsom", password: "123456", balance: 200)
 user2 = User.create(email: "a@b.com", username: "Tim Moss", password: "123456", balance: 200)
 
-question1 = Question.create(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 0.10, closing_date_and_time: date, user: user)
+question1 = Question.create(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 0.10, closing_date_and_time: date, user: user, active: false)
 
 Comment.create(body: "I think you should call it 'fast flowers'", question: question1, user: user2)
 
@@ -58,6 +58,6 @@ Comment.create(body: "Persia", question: question6, user: user2)
 Comment.create(body: "Doug", question: question6, user: user2)
 Comment.create(body: "Ewan", question: question6, user: user2)
 
-question7 = Question.create(title:"Who is the smartest person ever?", prize: 50, response_cost: 5.0, closing_date_and_time: date2, user: user)
-question8 = Question.create(title:"What is a reason to live?", description: "Not depressed just curious what your favourite parts about being alive are", prize: 50, response_cost: 5.0, closing_date_and_time: date2, user: user)
+question7 = Question.create(title:"Who is the smartest person ever?", prize: 50, response_cost: 5.0, closing_date_and_time: date3, user: user)
+question8 = Question.create(title:"What is a reason to live?", description: "Not depressed just curious what your favourite parts about being alive are", prize: 50, response_cost: 5.0, closing_date_and_time: date3, user: user)
 

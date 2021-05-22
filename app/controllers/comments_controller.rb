@@ -7,9 +7,7 @@ class CommentsController < ApplicationController
             current_user.balance -= @comment.question.response_cost
             current_user.save!
             @question.prize += @question.response_cost
-            p @question
             @question.save!
-
             redirect_to question_path(@question)
         else 
             flash.now[:errors] = @comment.errors.full_messages

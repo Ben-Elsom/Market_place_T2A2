@@ -9,11 +9,11 @@ class Question < ApplicationRecord
     has_one_attached :explaination_photo 
     belongs_to :user
     validate :has_enough_funds?
+    validate :date_is_in_future?
+
 
     def check_if_active?
         if self.closing_date_and_time < DateTime.now 
-            self.active = false 
-            self.save
             return false
         else 
             return true 
@@ -21,7 +21,19 @@ class Question < ApplicationRecord
     end
 
     def has_enough_funds?
-        errors.add(:prize, "can not be greater than your account balance") if user.balance < prize
+        if self.id
+            return true
+        else 
+            errors.add(:prize, "can not be greater than your account balance") if user.balance < prize
+        end
+    end
+
+    def date_is_in_future?
+        if self.closing_date_and_time > DateTime.now
+            return true 
+        else 
+            errors.add(:closing_date_and_time, "must be after current time")
+        end
     end
   
 end

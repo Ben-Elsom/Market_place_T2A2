@@ -1,19 +1,17 @@
 class QuestionsController < ApplicationController
     before_action :authenticate_user!, except: [:index] 
     before_action :check_auth, only: [:new, :create, :destroy]
-    before_action :set_questions, only: [:index, :new, :like]
     before_action :set_question, only: [:show, :destroy]
+    before_action :set_questions, only: [:index, :new, :like]
+    before_action :deactivate_old_questions_and_decide_winner, except: [:deactivate_old_questions_and_decide_winner, :create, :new, :show]
     def index
-        @questions.each do |question|
-            question.check_if_active?
-        end
         @questions = Question.where(active: "true")
 
+        # @questions = @questions.order(:response_cost)
         # if radio button says highest prize
         # @questions = @questions.order(:prize).reverse
 
         #if radio button says lowest response cost
-        @questions = @questions.order(:response_cost)
 
 
         # if radio button is least liked top comment
@@ -44,24 +42,40 @@ class QuestionsController < ApplicationController
             render action: 'new'
         end
     end
-
-   
+    
+    
     def destroy
         @question.destroy
         redirect_to root_path
     end
     
     def update
-
+        
     end
-
-
+    
+    def deactivate_old_questions_and_decide_winner
+        @questions = Question.all
+        @questions.each do |question|
+            if question.active == true
+                question.active = question.check_if_active?
+                question.save
+                if question.active == false && question.comments.count != 0
+                    winning_comment = question.comments.sort_by{|comment| comment.likes.count}.reverse.first
+                    winning_user = User.find(winning_comment.user_id)
+                    winning_user.balance += winning_comment.question.prize
+                    winning_user.save
+                end
+            end
+        end
+    end
+    
     private
     def set_questions
         @questions = Question.all
     end
-
+    
     def set_question 
+        
         @question = Question.find(params[:id])
     end
 
@@ -72,4 +86,5 @@ class QuestionsController < ApplicationController
     def check_auth
         authorize Question
     end
+
 end

@@ -1,4 +1,5 @@
 <h1>Show page</h1>
+<%= @question.id %>
 <p>Posted by: <strong><%= @question.user.username%></strong></p>
 <p><%= @question.title %></p>
 <p><%= @question.description  %></p>
@@ -7,8 +8,12 @@
 |
 <%= @question.response_cost %> 
 </div>
-<% time_remaining = @question.closing_date_and_time - DateTime.now%>
-<strong>Time remaining: </strong><%= ActiveSupport::Duration.build(time_remaining.round).inspect %>
+<% if @question.active %>
+    <%time_remaining = @question.closing_date_and_time - DateTime.now%>
+    <strong>Time remaining:</strong><%= ActiveSupport::Duration.build(time_remaining.round).inspect %>
+<% else %>
+    <strong>Time remaining:</strong> QUESTION CLOSED
+<%end%>
 <% if @question.explaination_photo.attached? %>
     <p><%= cl_image_tag @question.explaination_photo.key, crop: :scale, width: 150, cloud_name: 'bene' %></p>
 <% end %>
@@ -19,13 +24,14 @@
     <p><%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
 <% end %>
 
-
-<%= form_with model: @comment, local: true do |f| %>
-    <%= f.hidden_field :question_id, value: @question.id %>
-    <%= f.text_area :body, placeholder: "add a comment" %>
-    <%= f.submit %>
+<% if @question.active%>
+    <%= form_with model: @comment, local: true do |f| %>
+        <%= f.hidden_field :question_id, value: @question.id %>
+        <%= f.text_area :body, placeholder: "add a comment" %>
+        <%= f.submit %>
+    <% end %>
 <% end %>
-
+<hr>
 <% @question.comments.each do |comment| %>
     <span> Posted by: <strong><%= comment.user.username%></strong></span>
     <p><%= comment.body %></p>
@@ -40,6 +46,7 @@
     <% if policy(Comment).destroy? %>
         <h5><%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure you would like to delete this comment?"}%></h5>
     <% end %>
+    <hr>
 <% end %>
 <% if @question.comments.count == 0 %>
     <h1>🐶</h1>
