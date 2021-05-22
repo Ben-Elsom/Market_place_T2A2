@@ -41,3 +41,9 @@
         <h5><%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure you would like to delete this comment?"}%></h5>
     <% end %>
 <% end %>
+<% if @question.comments.count == 0 %>
+    <h1>🐶</h1>
+    <h3>Wow, such empty </h3>
+<% else %>
+    <hr>
+<% end %>
