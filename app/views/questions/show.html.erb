@@ -1,5 +1,5 @@
 <h1>Show page</h1>
-
+<p>Posted by: <strong><%= @question.user.username%></strong></p>
 <p><%= @question.title %></p>
 <p><%= @question.description  %></p>
 <div>
@@ -27,6 +27,7 @@
 <% end %>
 
 <% @question.comments.each do |comment| %>
+    <span> Posted by: <strong><%= comment.user.username%></strong></span>
     <p><%= comment.body %></p>
    <%= pluralize(comment.likes.count, "like")%>
     <% if user_signed_in? %>
