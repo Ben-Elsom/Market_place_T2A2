@@ -8,6 +8,20 @@ class QuestionsController < ApplicationController
             question.check_if_active?
         end
         @questions = Question.where(active: "true")
+
+        # if radio button says highest prize
+        # @questions = @questions.order(:prize).reverse
+
+        #if radio button says lowest response cost
+        @questions = @questions.order(:response_cost)
+
+
+        # if radio button is least liked top comment
+        # comments = @question.comment.order(:likes)
+        # top_comment = comments.first
+        # @questions = @question
+
+
     end
 
     def show     

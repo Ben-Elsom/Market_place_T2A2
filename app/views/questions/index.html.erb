@@ -3,9 +3,13 @@
     <h2><%= link_to "New question", new_question_path %></h2>
 <% end %>
 
+<p>Set question order:</p>
+
+
 <% @questions.each do |question|%>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
+           <p>Posted by: <strong><%= question.user.username%></strong></p>
             <h5 class="card-title"><%= link_to question.title, question_path(question) %></h5>
             <h6 class="card-subtitle mb-2 text-muted"><%= question.prize %> | <%= question.response_cost %> </h6>
             <p class="card-text"><%= question.description %> </p>
