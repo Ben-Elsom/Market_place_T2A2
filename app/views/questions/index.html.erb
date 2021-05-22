@@ -12,8 +12,8 @@
            <p>Posted by: <strong><%= question.user.username%></strong></p>
             <h5 class="card-title"><%= link_to question.title, question_path(question) %></h5>
             <h6 class="card-subtitle mb-2 text-muted"><%= question.prize %> | <%= question.response_cost %> </h6>
-            <p class="card-text"><%= question.description %> </p>
-            <%=Comment.where(question_id: question.id).count%> reponses
+            <p><%= truncate(question.description, :length => 100) if question.description %></p>
+            <span><%=Comment.where(question_id: question.id).count%> reponses<span>
             <% if user_signed_in? && policy(Question).destroy?%>
                 <p><%= link_to "Delete", question_path(question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
             <% end %>
