@@ -1,9 +1,10 @@
 class QuestionsController < ApplicationController
     before_action :authenticate_user!, except: [:index] 
     before_action :check_auth, only: [:new, :create, :destroy]
-    before_action :set_question, only: [:show, :destroy]
+    before_action :set_question, only: [:show, :destroy, :question_active?]
     before_action :set_questions, only: [:index, :new, :like]
-    before_action :deactivate_old_questions_and_decide_winner, except: [:deactivate_old_questions_and_decide_winner, :create, :new, :show]
+    before_action :question_active?, only: [:show]
+    before_action :deactivate_old_questions_and_decide_winner, except: [:deactivate_old_questions_and_decide_winner]
     def index
         @questions = Question.where(active: "true")
 
@@ -33,6 +34,8 @@ class QuestionsController < ApplicationController
     
     def create
         @question = Question.new(question_params)
+        @question.prize = @question.prize.round(2)
+        @question.response_cost = @question.response_cost.round(2)
         @question.user_id = current_user.id
         if @question.save
             current_user.balance -= question_params[:prize].to_i
@@ -51,6 +54,10 @@ class QuestionsController < ApplicationController
     
     def update
         
+    end
+
+    def question_active?
+        @active = @question.closing_date_and_time > DateTime.now
     end
     
     def deactivate_old_questions_and_decide_winner

@@ -9,8 +9,12 @@ class Question < ApplicationRecord
     has_one_attached :explaination_photo 
     belongs_to :user
     validate :has_enough_funds?
-    validate :date_is_in_future?
+    validate :date_is_in_future?, :if => :exists?
 
+
+    def exists?
+        self.id.nil?
+    end
 
     def check_if_active?
         if self.closing_date_and_time < DateTime.now 

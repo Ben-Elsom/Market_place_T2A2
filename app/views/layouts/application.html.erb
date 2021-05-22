@@ -14,8 +14,8 @@
   <body class="container db-flex">
     <h1><%= link_to "Home", root_path %></h1>
     <% if current_user %>
-      <%= current_user.username%>
-      $<%= current_user.balance %>
+      <%= current_user.username%> | 
+      $<%= current_user.balance.round(2) %> | 
       <%= current_user.email %>
       |
       <%= link_to "Logout", destroy_user_session_path, method: :delete	%>
