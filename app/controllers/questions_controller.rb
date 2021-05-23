@@ -61,6 +61,7 @@ class QuestionsController < ApplicationController
     end
     
     def deactivate_old_questions_and_decide_winner
+        @most_recent_win = "test"
         @questions = Question.all
         @questions.each do |question|
             if question.active == true
@@ -71,6 +72,7 @@ class QuestionsController < ApplicationController
                     winning_user = User.find(winning_comment.user_id)
                     winning_user.balance += winning_comment.question.prize
                     winning_user.save
+                    
                 end
             end
         end

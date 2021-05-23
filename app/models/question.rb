@@ -10,11 +10,11 @@ class Question < ApplicationRecord
     has_one_attached :explaination_photo 
     belongs_to :user
     validate :has_enough_funds?
-    validate :date_is_in_future?, :if => :exists?
+    validate :valid_date?, :unless => :exists?
 
 
     def exists?
-        self.id.nil?
+        !self.id.nil?
     end
 
     def check_if_active?
@@ -33,10 +33,10 @@ class Question < ApplicationRecord
         end
     end
 
-    def date_is_in_future?
+    def valid_date?
         if self.closing_date_and_time > DateTime.now
             return true 
-        else 
+        else
             errors.add(:closing_date_and_time, "must be after current time")
         end
     end

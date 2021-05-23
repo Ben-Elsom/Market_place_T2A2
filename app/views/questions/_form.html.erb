@@ -5,7 +5,7 @@
         <%= f.input :description %>
         <%= f.input :prize%>
         <%= f.input :response_cost%>        
-        <%= f.input :closing_date_and_time %>
+        <%= f.input :closing_date_and_time, :as => :datetime %>
         <%= f.input :explaination_photo%>    
         <%= f.submit %>
         <button><%= link_to "Cancel", root_path %></button>
