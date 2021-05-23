@@ -1,10 +1,11 @@
 
 
 class Question < ApplicationRecord
-    validates :title, presence: true
-    validates :prize, presence: true
-    validates :response_cost, presence: true
+    validates :title, presence: true, length: { maximum: 100 }
+    validates :prize, presence: true, numericality: { greater_than_or_equal_to: 20 }
+    validates :response_cost, presence: true, numericality: { greater_than_or_equal_to: 5 }
     validates :closing_date_and_time, presence: true
+    validates :description, length: { maximum: 500 }
     has_many :comments, dependent: :destroy 
     has_one_attached :explaination_photo 
     belongs_to :user

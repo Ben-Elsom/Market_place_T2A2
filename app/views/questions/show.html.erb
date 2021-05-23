@@ -17,10 +17,8 @@
     <p><%= cl_image_tag @question.explaination_photo.key, crop: :scale, width: 150, cloud_name: 'bene' %></p>
 <% end %>
 
-
-
 <% if policy(Question).destroy? %>
-    <p><%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
+    <p><%= link_to "Delete Question", question_path(@question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
 <% end %>
 
 <% if @active %>
@@ -35,7 +33,7 @@
     <span> Posted by: <strong><%= truncate(comment.user.username, :length => 100)%></strong></span>
     <p><%= comment.body %></p>
    <%= pluralize(comment.likes.count, "like")%>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && @question.user_id != current_user.id %>
         <% if comment.liked?(current_user) %>
             <%= button_to "Unlike", like_path(comment), method: :delete%>
         <% else %>
