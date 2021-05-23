@@ -65,17 +65,38 @@ class QuestionsController < ApplicationController
         @questions.each do |question|
             if question.active == true
                 question.active = question.check_if_active?
-                question.save
+                
                 if question.active == false && question.comments.count != 0
                     winning_comment = question.comments.sort_by{|comment| comment.likes.count}.reverse.first
-                    winning_user = User.find(winning_comment.user_id)
-                    winning_user.balance += winning_comment.question.prize
-                    winning_user.save
+                    most_likes = winning_comment.likes.count
+                    winning_comments = []
+
+                    temp = Comment.where(question_id: question.id)
+
+                    temp.each do |comment|
+                        if comment.likes.count == most_likes
+                            winning_comments.push(comment)
+                        end
+                    end
+                    if winning_comments.count == 1
+                        winning_user = winning_comments.user
+                        winning_user += winning_comment.question.prize
+                        winning_user.save
+                    else 
+                        @tie_breaker = winning_comments
+                        redirect_to tie_breaker_path if current_user.id == question.user_id
+                        question.save
+                    end
+                    
+                   
                 end
             end
         end
     end
     
+    def tie_breaker
+
+    end
     private
     def set_questions
         @questions = Question.all

@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :comments
   post '/comments/:id/like', to: 'likes#create', as: 'like'
   delete '/comments/:id/like', to: 'likes#destroy'
+  get 'question/tie_breaker', to: 'questions#tie_breaker'
 end
