@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
     before_action :set_question, only: [:show, :destroy, :question_active?]
     before_action :set_questions, only: [:index, :new, :like]
     before_action :question_active?, only: [:show]
-    before_action :deactivate_old_questions_and_decide_winner, except: [:deactivate_old_questions_and_decide_winner]
+    before_action :deactivate_old_questions
     def index
         @questions = Question.where(active: "true")
 
@@ -59,42 +59,49 @@ class QuestionsController < ApplicationController
     def question_active?
         @active = @question.closing_date_and_time > DateTime.now
     end
+
+    def decide_winner(question)
+        winning_comment = question.comments.sort_by{|comment| comment.likes.count}.reverse.first
+        most_likes = winning_comment.likes.count
+        winning_comments = []
+
+        all_comments_for_that_question = Comment.where(question_id: question.id)
+
+        all_comments_for_that_question.each do |comment|
+            if comment.likes.count == most_likes
+                winning_comments.push(comment)
+            end
+        end
+
+        if winning_comments.count == 1
+            winning_user = winning_comments.user
+            winning_user += winning_comment.question.prize
+            winning_user.save
+        else 
+            redirect_to tie_breaker(winning_comments)
+        end
+    end
     
-    def deactivate_old_questions_and_decide_winner
+    def deactivate_old_questions
         @questions = Question.all
         @questions.each do |question|
             if question.active == true
                 question.active = question.check_if_active?
-                
+                question.save 
                 if question.active == false && question.comments.count != 0
-                    winning_comment = question.comments.sort_by{|comment| comment.likes.count}.reverse.first
-                    most_likes = winning_comment.likes.count
-                    winning_comments = []
-
-                    temp = Comment.where(question_id: question.id)
-
-                    temp.each do |comment|
-                        if comment.likes.count == most_likes
-                            winning_comments.push(comment)
-                        end
-                    end
-                    if winning_comments.count == 1
-                        winning_user = winning_comments.user
-                        winning_user += winning_comment.question.prize
-                        winning_user.save
-                    else 
-                        @tie_breaker = winning_comments
-                        redirect_to tie_breaker_path if current_user.id == question.user_id
-                        question.save
-                    end
-                    
-                   
+                    decide_winner(question)
+                elsif question.comments.count == 0
+                    admin = user.where(email: "admin@a.com")
+                    admin.balance += question.prize
+                    admin.save
                 end
             end
         end
     end
     
-    def tie_breaker
+    def tie_breaker(winning_comments)
+        @winning_comments = winning_comments
+        # user is taken to the tie breaker page where they are asked who they want to give the money to. 
 
     end
     private
