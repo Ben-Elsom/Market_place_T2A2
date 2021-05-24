@@ -10,7 +10,7 @@ class Question < ApplicationRecord
     has_one_attached :explaination_photo 
     belongs_to :user
     validate :has_enough_funds?
-    validate :valid_date?, :unless => :exists?
+    validate :date_is_in_future?, :unless => :exists?
 
 
     def exists?
@@ -40,7 +40,7 @@ class Question < ApplicationRecord
             return false
         end
     end
-    
+
     def date_is_in_future?
         if self.closing_date_and_time > DateTime.now
             return true 
