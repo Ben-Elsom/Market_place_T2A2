@@ -12,6 +12,7 @@ class LikesController < ApplicationController
     end
 
     def final_like
+        Like.create(user_id: current_user.id, comment_id: params[:id])
         redirect_to "questions#show"
     end
 

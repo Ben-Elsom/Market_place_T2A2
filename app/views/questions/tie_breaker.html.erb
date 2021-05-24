@@ -1,11 +1,9 @@
 <h1>Tie breaker</h1>
 <%= @question.title %>
-<% @winning_comments.each do |comment|%>
+<% @questions_that_need_tie_breaking.each do |comment|%>
 
   <span> Posted by: <strong><%= truncate(comment.user.username, :length => 100)%></strong></span>
   <p><%= comment.body %></p>
   <%= pluralize(comment.likes.count, "like")%>
-  <%# <%= button_to "like", like_path(comment), method: :post %>
-
-  <%# button_to final_like_path %>
+  <%= button_to "like", final_like_path(comment), method: :post %>
 <% end %>

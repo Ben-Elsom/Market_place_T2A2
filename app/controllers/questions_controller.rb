@@ -6,21 +6,9 @@ class QuestionsController < ApplicationController
     before_action :question_active?, only: [:show]
     # before_action :deactivate_old_questions
     def index
-        # string = foo("hello ")
-        # render plain: string
+        
+        # check the current users questions and see if any are inactive and not decided 
         @questions = Question.where(active: "true")
-
-        # @questions = @questions.order(:response_cost)
-        # if radio button says highest prize
-        # @questions = @questions.order(:prize).reverse
-
-        #if radio button says lowest response cost
-
-
-        # if radio button is least liked top comment
-        # comments = @question.comment.order(:likes)
-        # top_comment = comments.first
-        # @questions = @question
 
 
     end
@@ -65,24 +53,27 @@ class QuestionsController < ApplicationController
 
     
     def tie_breaker
-        decide_winner
-        
+        most_likes = @question.comments.sort_by{|comment| comment.likes.count}.last
+        @questions_that_need_tie_breaking = @question.comments.where(likes: most_likes.likes)
+
         # user is taken to the tie breaker page where they are asked who they want to give the money to. 
         
     end
     private
-
-    def foo(string)
-        return string * 2
+    def needs_tie_breaker?
+        sorted_by_likes = @question.comments.sort_by{|comment| comment.likes.count}
+        if sorted_by_likes.last.likes == sorted_by_likes[-2].likes
+            return true
+        else
+            return false
+        end
     end
 
     def set_questions
-   
         @questions = Question.all
     end
     
     def set_question 
-        
         @question = Question.find(params[:id])
     end
 
@@ -94,18 +85,26 @@ class QuestionsController < ApplicationController
         authorize Question
     end
 
-
     def question_active?
         @active = @question.closing_date_and_time > DateTime.now
     end
 
-    def is_tie_broken?
-        # findall comments to that questions - order by like count
-        # limit to 2
-        # return true or false if last_comment.likes == 2nd_last.likes
-    end
+    
 
     def decide_winner
+        if @question.active == false && @question.prize_given == false
+            if @question.needs_tie_breaker?
+                # maybe save this question to a table that is jsut the questions that needs tie breaking
+                redirect_to tie_breaker_path
+            else 
+                winning_comment = @question.comments.sort_by{|comment| comment.likes.count}.last
+                winning_user = winning_comments.user
+                winning_user += winning_comment.question.prize
+                winning_user.save
+            end
+        end
+
+
         sorted_by_likes = @question.comments.sort_by{|comment| comment.likes.count}
         most_likes = winning_comment.likes.count
         @winning_comments = []
