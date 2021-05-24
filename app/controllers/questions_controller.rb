@@ -18,11 +18,13 @@ class QuestionsController < ApplicationController
     end
 
     def closed_questions_index
-        @questions = Question.where(active: "flase")
+        @questions = Question.where(active: "false")
+        @questions = @questions.sort_by{|question| question.updated_at}
     end
 
     def show
         @comment = Comment.new
+        @comments = @question.comments.sort_by{|comment| comment.likes.count}.reverse
     end 
 
     def new
