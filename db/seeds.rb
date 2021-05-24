@@ -1,6 +1,7 @@
 User.destroy_all
+MostRecentWin.destroy_all
 
-date = DateTime.now + 1.day
+date = DateTime.now + 1.minute
 date2 = DateTime.now + 1.hour
 date3 = DateTime.now + 3.day
 date4 = DateTime.now + 4.day
@@ -12,12 +13,13 @@ user.add_role :admin
 user.save
 user2 = User.create(email: "user@a.com", username: "User", password: "123456", balance: 200)
 
-question1 = Question.create(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 20, closing_date_and_time: date, user: user)
+question1 = Question.create!(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 20, closing_date_and_time: date, user: user)
 
-Comment.create(body: "I think you should call it 'fast flowers'", question: question1, user: user2)
+comment = Comment.create(body: "I think you should call it 'fast flowers'", question: question1, user: user2)
 
 Comment.create(body: "'Real quick roses'", question: question1, user: user2)
 Comment.create(body: "'Speedy spuds'", question: question1, user: user2)
+Like.create(user: user, comment: comment)
 
 question2 = Question.create(title:"What should I do for a hobby", description: " I am a 19 year old boy who has too much free time and want to know what would be the best hobby for me to get into. I want to impress girls and hopefully be able to earn money off of it one day. ", prize: 100, response_cost: 10, closing_date_and_time: date2, user: user)
 

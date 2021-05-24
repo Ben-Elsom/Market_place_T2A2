@@ -1,0 +1,2 @@
+class MostRecentWin < ApplicationRecord
+end

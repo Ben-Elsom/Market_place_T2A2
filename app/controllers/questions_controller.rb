@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
         end
 
         @questions = Question.where(active: "true")
+        @most_recent_win = MostRecentWin.last
     end
 
     def closed_questions_index
@@ -122,6 +123,7 @@ class QuestionsController < ApplicationController
                     winning_user.save
                     question.prize_given = true
                     question.save
+                    temp = MostRecentWin.create(title: winning_comment.question.title, username: winning_comment.user.username, prize: winning_comment.question.prize, comment: winning_comment.body)
                 end
             end
         end
