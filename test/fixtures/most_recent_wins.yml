@@ -1,13 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  username: MyString
-  prize: 1.5
-  comment: MyText
+  question: one
+  comment: one
 
 two:
-  title: MyString
-  username: MyString
-  prize: 1.5
-  comment: MyText
+  question: two
+  comment: two

@@ -1,14 +1,10 @@
 <h1>Questions </h1>
 <% if @most_recent_win%>
-    <p>Congratulations to <%=@most_recent_win.username%> on their win of <strong>$<%=@most_recent_win.prize%></strong> on question "<%= @most_recent_win.title%>" with comment "<%= @most_recent_win.comment%>"</p>
+    <p>Congratulations to <%=@most_recent_win.comment.user.username%> on their win of <strong>$<%=@most_recent_win.question.prize%></strong> on question "<%= @most_recent_win.question.title%>" with comment "<%= @most_recent_win.comment.body%>"</p>
 <% end %>
 <% if user_signed_in? %>
     <h2><%= link_to "New question", new_question_path %></h2>
 <% end %>
-
-
-<p>Set question order:</p>
-
 
 <% @questions.each do |question|%>
     <div class="card" style="width: 18rem;">

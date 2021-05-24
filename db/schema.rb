@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_103833) do
+ActiveRecord::Schema.define(version: 2021_05_24_133457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,12 +63,12 @@ ActiveRecord::Schema.define(version: 2021_05_24_103833) do
   end
 
   create_table "most_recent_wins", force: :cascade do |t|
-    t.string "title"
-    t.string "username"
-    t.float "prize"
-    t.text "comment"
+    t.bigint "question_id"
+    t.bigint "comment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_most_recent_wins_on_comment_id"
+    t.index ["question_id"], name: "index_most_recent_wins_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -124,5 +124,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_103833) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "comments"
   add_foreign_key "likes", "users"
+  add_foreign_key "most_recent_wins", "comments"
+  add_foreign_key "most_recent_wins", "questions"
   add_foreign_key "questions", "users"
 end

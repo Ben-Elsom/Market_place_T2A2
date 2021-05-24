@@ -21,9 +21,6 @@
     <p><%= link_to "Delete Question", question_path(@question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
 <% end %>
 
-<%= @most_recent_win%>
-<%= @test %>
-
 <% if @active %>
     <%= form_with model: @comment, local: true do |f| %>
         <%= f.hidden_field :question_id, value: @question.id %>

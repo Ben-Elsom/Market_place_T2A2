@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
     before_action :question_active?, only: [:show]
     before_action :deactivate_old_questions, only: [:index]
     before_action :decide_winner, only: [:index]
-    # before_action :deactivate_old_questions
     def index
         questions = Question.where(user_id: current_user.id)
         questions = questions.select{|question| question.needs_tie_breaker?}
@@ -123,7 +122,7 @@ class QuestionsController < ApplicationController
                     winning_user.save
                     question.prize_given = true
                     question.save
-                    temp = MostRecentWin.create(title: winning_comment.question.title, username: winning_comment.user.username, prize: winning_comment.question.prize, comment: winning_comment.body)
+                    MostRecentWin.create(question: question, comment: winning_comment)
                 end
             end
         end
