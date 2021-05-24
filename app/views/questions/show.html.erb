@@ -32,7 +32,7 @@
     <% end %>
 <% end %>
 <hr>
-<% @question.comments.each do |comment| %>
+<% @comments.each do |comment| %>
     <span> Posted by: <strong><%= truncate(comment.user.username, :length => 100)%></strong></span>
     <p><%= comment.body %></p>
    <%= pluralize(comment.likes.count, "like")%>
@@ -48,9 +48,11 @@
     <% end %>
     <hr>
 <% end %>
-<% if @question.comments.count == 0 %>
+<% if @question.comments.count == 0 && @question.active %>
     <h1>🐶</h1>
     <h3>Wow, such empty </h3>
+<% elsif @question.comments.count == 0 && !@question.active %>
+    <h3>No one responded to this question :(</h3>
 <% else %>
     <hr>
 <% end %>

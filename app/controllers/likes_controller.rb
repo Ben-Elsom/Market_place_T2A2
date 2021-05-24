@@ -10,4 +10,10 @@ class LikesController < ApplicationController
         @like.destroy
         redirect_back(fallback_location: root_path)
     end
+
+    def final_like
+        like = Like.create!(user_id: current_user.id, comment_id: params[:id])
+        redirect_to root_path
+    end
+
 end

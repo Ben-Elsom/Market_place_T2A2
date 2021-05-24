@@ -3,11 +3,6 @@
     <h2><%= link_to "New question", new_question_path %></h2>
 <% end %>
 
-<% if @most_recent_win %>
-<% end %>
-
-<%= @most_recent_win %>
-
 <p>Set question order:</p>
 
 
@@ -15,16 +10,17 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
            <p>Posted by: <strong><%= question.user.username%></strong></p>
+           <p>Closed on <strong><%=question.closing_date_and_time.to_date%></strong></p>
             <h5 class="card-title"><%= link_to question.title, question_path(question) %></h5>
             <h6 class="card-subtitle mb-2 text-muted"><%= question.prize %> | <%= question.response_cost %> </h6>
             <p><%= truncate(question.description, :length => 100) if question.description %></p>
             <span><%=Comment.where(question_id: question.id).count%> reponses<span>
-            <p><%=distance_of_time_in_words(DateTime.now, question.closing_date_and_time) %> left</p>
-
             <% if user_signed_in? && policy(Question).destroy?%>
                 <p><%= link_to "Delete", question_path(question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
             <% end %>
         </div>
     </div>
+    
+
 <% end %>
 
