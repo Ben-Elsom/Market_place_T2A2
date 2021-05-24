@@ -10,4 +10,9 @@ class LikesController < ApplicationController
         @like.destroy
         redirect_back(fallback_location: root_path)
     end
+
+    def final_like
+        redirect_to "questions#show"
+    end
+
 end

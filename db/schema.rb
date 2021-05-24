@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_132151) do
     t.string "description"
     t.float "prize"
     t.float "response_cost"
+    # f.boolean "decided"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "closing_date_and_time"
