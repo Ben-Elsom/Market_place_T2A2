@@ -17,7 +17,7 @@ class Question < ApplicationRecord
         self.id.nil?
     end
 
-    def check_if_active?
+    def is_active?
         if self.closing_date_and_time < DateTime.now 
             return false
         else 
@@ -33,6 +33,13 @@ class Question < ApplicationRecord
         end
     end
 
+    def needs_tie_breaker?
+        if self.active == false && self.prize_given == false 
+            return true
+        else 
+            return false
+        end
+    end
     def date_is_in_future?
         if self.closing_date_and_time > DateTime.now
             return true 
