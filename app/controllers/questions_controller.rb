@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
     before_action :authenticate_user!
-    before_action :check_auth, only: [:new, :create, :destroy]
     before_action :set_question, only: [:show, :destroy, :question_active?, :tie_breaker, :edit, :update]
+    before_action :check_auth, only: [:create, :destroy, :edit, :update]
     before_action :question_active?, only: [:show]
     before_action :deactivate_old_questions, only: [:index]
     before_action :decide_winner, only: [:index]
@@ -31,11 +31,13 @@ class QuestionsController < ApplicationController
     def new
         # Opening a new instance of a comment so my form knows what element the form is for
         @question = Question.new
+        check_auth
         @current_user = current_user
     end
     
     def create
-        # I am calling question.new so that my question form knows what to base the form off 
+        # This method creates the new question. Checks that there is a prize specified, if there isn't then it will set it as 0 so that it will fail validation rather than throw and error
+        # If the saving fails then it rerenders the new page
         @question = Question.new(question_params)
         if !@question.prize.nil?
             @question.prize = @question.prize.round(2) 
@@ -59,15 +61,17 @@ class QuestionsController < ApplicationController
     
     
     def destroy
+        # This destroys a question and take them back to the home page
         @question.destroy
         redirect_to root_path
     end
 
     def edit
-
+        # This method just sent the question in the before action and then sends them to the edit page
     end
 
     def update
+        # This method updates a question with the allowed params and then sends them back to the root path. If it fails, is renders the errors page again as well as the errros
         if @question.update(update_question_params)
             @question.update(update_question_params)
             redirect_to root_path
@@ -79,6 +83,7 @@ class QuestionsController < ApplicationController
 
     
     def tie_breaker
+
         most_likes = @question.comments.sort_by{|comment| comment.likes.count}.last.likes.count
         @questions_that_need_tie_breaking = []
         @question.comments.each do |comment|
@@ -104,15 +109,18 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
+        # This sets the allowed fields for making a question as well as saying that it must be in the hash question.
         params.require(:question).permit(:title, :description, :prize, :response_cost, :closing_date_and_time, :explaination_photo )
     end
 
     def update_question_params
+        # This sets the allowed fields for updating a question as well as stating it must be inside the hash
         params.require(:question).permit(:title, :description, :closing_date_and_time, :explaination_photo )
     end
 
     def check_auth
-        authorize Question
+        # This checks if a user that is trying to do an action has the authority in the question policy to do it
+        authorize @question
     end
 
     def question_active?
