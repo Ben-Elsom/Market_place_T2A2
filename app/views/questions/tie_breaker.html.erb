@@ -1,5 +1,5 @@
 <h1>Tie breaker</h1>
-<p>Your question "<%= @question.title %>" ended in a tie. Please choose your favourite response and we will give the price to them. </p>
+<p>Your question "<strong><%= @question.title %></strong>" ended in a tie. Please choose your favourite response and we will give the price to them. </p>
 <p>worth: $<%= @question.prize%></p>
 <% @questions_that_need_tie_breaking.each do |comment|%>
   <span> Posted by: <strong><%= truncate(comment.user.username, :length => 100)%></strong></span>

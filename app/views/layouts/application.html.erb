@@ -32,8 +32,15 @@
     <% if notice %>
       <p class="notice"><%= notice %></p>
     <% end %>
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
+    <% if alert.respond_to?('each') %>
+      <p class="alert">
+      <ul>
+        <% alert.each do |individual_alert| %></p>
+          <li><%= individual_alert %></li>
+        <% end %>
+      </ul>
+    <% elsif alert %>
+      <p class="alert"><%= alert %>
     <% end %>
     <% if flash[:errors] %>
       <section class="errors">

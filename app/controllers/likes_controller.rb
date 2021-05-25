@@ -12,7 +12,7 @@ class LikesController < ApplicationController
     end
 
     def final_like
-        like = Like.create!(user_id: current_user.id, comment_id: params[:id])
+        like = Like.create(user_id: current_user.id, comment_id: params[:id])
         redirect_to root_path
     end
 

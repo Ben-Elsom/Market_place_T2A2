@@ -1,6 +1,6 @@
 <h1>Questions </h1>
 <% if @most_recent_win%>
-    <p>Congratulations to <%=@most_recent_win.comment.user.username%> on their win of <strong>$<%=@most_recent_win.question.prize%></strong> on question "<%= @most_recent_win.question.title%>" with comment "<%= @most_recent_win.comment.body%>"</p>
+    <p>Congratulations to <strong><%=@most_recent_win.comment.user.username%></strong> on their win of <strong>$<%=@most_recent_win.question.prize%></strong> on question "<%= @most_recent_win.question.title%>" with response "<%= @most_recent_win.comment.body%>" with <%=pluralize(@most_recent_win.comment.likes.count, "like")%></p>
 <% end %>
 <% if user_signed_in? %>
     <h2><%= link_to "New question", new_question_path %></h2>

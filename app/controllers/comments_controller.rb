@@ -3,15 +3,15 @@ class CommentsController < ApplicationController
         @comment = Comment.new(comment_params)
         @comment.user_id = current_user.id
         @question = @comment.question
-        if @comment.save 
+        if @comment.save
             current_user.balance -= @comment.question.response_cost
             current_user.save!
             @question.prize += @question.response_cost
             @question.save!
             redirect_to question_path(@question)
         else 
-            flash.now[:errors] = @comment.errors.full_messages
-            render "questions/show"
+            flash.alert = @comment.errors.full_messages
+            redirect_to question_path(@question)
         end
     end
     

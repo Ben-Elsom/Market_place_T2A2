@@ -2,40 +2,51 @@ class QuestionsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_auth, only: [:new, :create, :destroy]
     before_action :set_question, only: [:show, :destroy, :question_active?, :tie_breaker]
-    before_action :set_questions, only: [:index, :new, :like]
     before_action :question_active?, only: [:show]
     before_action :deactivate_old_questions, only: [:index]
     before_action :decide_winner, only: [:index]
     def index
-        questions = Question.where(user_id: current_user.id)
-        questions = questions.select{|question| question.needs_tie_breaker?}
-        if questions.empty? == false
-            redirect_to tie_breaker_path(questions[0].id)
+        # checking if any of the questions that the user has made needs a tie breaker and then redirectiing them to the tie breaker page for that question.
+        questions_that_need_tie_breaking = Question.where(user_id: current_user.id, active: false, prize_given: false).select{|question| question.needs_tie_breaker?}
+        if !questions_that_need_tie_breaking.empty? 
+            redirect_to tie_breaker_path(questions_that_need_tie_breaking[0].id)
         end
-
-        @questions = Question.where(active: "true")
+        # retrieving all of the active questions to display on the index page 
+        @questions = Question.where(active: true)
+        # Getting the most recent win to show up on the index page
         @most_recent_win = MostRecentWin.last
     end
 
     def closed_questions_index
-        @questions = Question.where(active: "false")
-        @questions = @questions.sort_by{|question| question.updated_at}
+        # getting all of the inactive question for the closed questions index
+        @questions = Question.where(active: false).sort_by{|question| question.updated_at}
     end
 
     def show
+        # Opening a new instance of a comment so my form knows what element the form is for
         @comment = Comment.new
         @comments = @question.comments.sort_by{|comment| comment.likes.count}.reverse
     end 
 
     def new
+        # Opening a new instance of a comment so my form knows what element the form is for
         @question = Question.new
         @current_user = current_user
     end
     
     def create
+        # I am calling question.new so that my question form knows what to base the form off 
         @question = Question.new(question_params)
-        @question.prize = @question.prize.round(2)
-        @question.response_cost = @question.response_cost.round(2)
+        if !@question.prize.nil?
+            @question.prize = @question.prize.round(2) 
+        else 
+            @question.prize = 0
+        end
+        if !@question.response_cost.nil?
+            @question.response_cost = @question.response_cost.round(2) 
+        else 
+            @question.response_cost = 0
+        end
         @question.user_id = current_user.id
         if @question.save
             current_user.balance -= question_params[:prize].to_i
@@ -50,6 +61,10 @@ class QuestionsController < ApplicationController
     def destroy
         @question.destroy
         redirect_to root_path
+    end
+
+    def edit
+
     end
     
     def update
@@ -76,12 +91,9 @@ class QuestionsController < ApplicationController
             return false
         end
     end
-
-    def set_questions
-        @questions = Question.all
-    end
     
     def set_question 
+        # This is to set the question passed on what page the user is on. 
         @question = Question.find(params[:id])
     end
 
