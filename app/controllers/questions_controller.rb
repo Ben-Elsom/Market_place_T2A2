@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_auth, only: [:new, :create, :destroy]
-    before_action :set_question, only: [:show, :destroy, :question_active?, :tie_breaker]
+    before_action :set_question, only: [:show, :destroy, :question_active?, :tie_breaker, :edit, :update]
     before_action :question_active?, only: [:show]
     before_action :deactivate_old_questions, only: [:index]
     before_action :decide_winner, only: [:index]
@@ -66,9 +66,15 @@ class QuestionsController < ApplicationController
     def edit
 
     end
-    
+
     def update
-        
+        if @question.update(update_question_params)
+            @question.update(update_question_params)
+            redirect_to root_path
+        else
+            flash.now[:errors] = @question.errors.full_messages
+            render action: 'edit'
+        end
     end
 
     
@@ -99,6 +105,10 @@ class QuestionsController < ApplicationController
 
     def question_params
         params.require(:question).permit(:title, :description, :prize, :response_cost, :closing_date_and_time, :explaination_photo )
+    end
+
+    def update_question_params
+        params.require(:question).permit(:title, :description, :closing_date_and_time, :explaination_photo )
     end
 
     def check_auth

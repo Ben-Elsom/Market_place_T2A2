@@ -23,7 +23,11 @@ class QuestionPolicy
   end
 
   def update?
-    false
+    if @user.id == @record.user_id
+      return true
+    else 
+      return false
+    end
   end
 
   def edit?
