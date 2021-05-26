@@ -92,6 +92,10 @@ class QuestionsController < ApplicationController
         end
     end
 
+    def rules 
+        
+    end
+
     private
     def needs_tie_breaker?(question)
         # This is a method that checks where a specified comment neeeds a tie breaker by checking if the top two comments have the same number of likes 
@@ -120,7 +124,11 @@ class QuestionsController < ApplicationController
 
     def check_auth
         # This checks if a user that is trying to do an action has the authority in the question policy to do it. We run this as a before action on the sensitive actions. CHECK THIS ONE 
-        authorize @question
+        begin 
+            authorize @question
+        rescue 
+            authorize Question
+        end
     end
 
     def question_active?

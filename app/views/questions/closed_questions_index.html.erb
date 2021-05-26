@@ -1,9 +1,8 @@
-<h1>Questions </h1>
+<h1>Closed Questions </h1>
 <% if user_signed_in? %>
     <h2><%= link_to "New question", new_question_path %></h2>
 <% end %>
 
-<p>Set question order:</p>
 
 
 <% @questions.each do |question|%>

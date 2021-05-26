@@ -43,11 +43,10 @@ class Question < ApplicationRecord
     end
 
     def date_is_in_future?
-        if self.closing_date_and_time > DateTime.now
+        if self.closing_date_and_time > DateTime.now 
             return true 
         else
             errors.add(:closing_date_and_time, "must be after current time")
         end
     end
-  
 end
