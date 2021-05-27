@@ -92,9 +92,7 @@ class QuestionsController < ApplicationController
         end
     end
 
-    def about
 
-    end
 
     private
     def needs_tie_breaker?(question)

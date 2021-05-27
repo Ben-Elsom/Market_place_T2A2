@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'questions#index'
-  get 'questions/about', to: 'questions#about', as: 'about'
+  get '/about', to: 'static_pages#about', as: 'about'
   get 'questions/closed_questions_index', to:'questions#closed_questions_index', as:"closed_questions_index"
   resources :questions
   resources :comments
