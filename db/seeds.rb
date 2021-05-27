@@ -1,7 +1,7 @@
 User.destroy_all
 MostRecentWin.destroy_all
 
-date = DateTime.now + 1.second
+date = DateTime.now + 1.minute
 date2 = DateTime.now + 1.hour
 date3 = DateTime.now + 3.day
 date4 = DateTime.now + 4.day
