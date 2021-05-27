@@ -24,12 +24,14 @@ class CommentsController < ApplicationController
     end
 
     def destroy 
+        # This finds the comment that the user is hiting the delete button on and then destroy that comment
         @comment = Comment.find(params[:id])
         @comment.destroy
         redirect_back(fallback_location: root_path)
     end
 
     def check_auth
+        # This checks whether the action that a user is trying to perform is allowed in the comment policy
         authorize Comment
     end
 end
