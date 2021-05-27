@@ -5,9 +5,9 @@
 <% if user_signed_in? %>
     <h2><%= link_to "New question", new_question_path %></h2>
 <% end %>
-<div class="d-flex justify-content-center">
+<div class="d-flex align-content-stretch flex-wrap justify-content-around">
     <% @questions.each do |question|%>
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 20rem;">
             <div class="card-body">
             <p>Posted by: <strong><%= question.user.username%></strong></p>
                 <h5 class="card-title"><%= link_to question.title, question_path(question) %></h5>

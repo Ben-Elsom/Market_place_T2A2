@@ -3,9 +3,7 @@
 Coming up with good ideas is hard. All industries and classes of people (Professional, casual, student) need to come up with unique, innovative or plain just good ideas for whatever it is they are doing.
 I want to help these people with the issue i have seen people facing, coming up with good ideas is hard. 
 
-
-
-My app Idealab is a new idea generating framework that allows users to harness the power of numbers while 
+My app Idealab is a new idea generating tool that allows users to harness the power of numbers while minimizing the draw backs
 
 There are casual services that can help people generate ideas but they are either not specific enough (name generators) or have lots of low quality answers (Ask reddit, Instagram polls).
 
@@ -31,7 +29,7 @@ However, when a user makes a comment they must also pay the response cost set by
 
 In the event of a tie when a question closes and two or more questions have the same number of likes the creator of a question will be displayed the top responses and will get to chose which comment deserves to win the prize. 
 
-Users start with $200 and the only way to make more money is to win it. Good luck!
+Users start with $200 and the only way to make more money is to win it.
 
 ##### Purpose 
 The purpose of my app is to help it's users come up with the best answer or just ideas for whatever it may be that they are pondering in their life/business. My app allows incourages higher quality answers and less low quality answers through the use of the prize and response cost system. 
@@ -66,6 +64,8 @@ My user stories are stored inside of each of my trello cards.
 https://trello.com/b/baNUCtjg/market-place-assignment
 
 #### Sitemap
+
+
 
 
 #### Describe the way tasks are allocated and tracked in your project DONE

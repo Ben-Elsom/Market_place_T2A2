@@ -14,7 +14,7 @@
     <strong>Time remaining:</strong> QUESTION CLOSED
 <%end%>
 <% if @question.explaination_photo.attached? %>
-    <p><%= cl_image_tag @question.explaination_photo.key, crop: :scale, width: 150, cloud_name: 'bene' %></p>
+    <p><%= cl_image_tag @question.explaination_photo.key, crop: :scale, width: 500, cloud_name: 'bene' %></p>
 <% end %>
 
 <% if policy(Question).destroy? %>

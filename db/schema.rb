@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_024159) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "body"
+    t.text "body", default: "I'm"
     t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(version: 2021_05_27_024159) do
     t.datetime "closing_date_and_time"
     t.boolean "active", default: true
     t.bigint "user_id", null: false
-    t.boolean "prize_given", default: false
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
@@ -104,7 +103,6 @@ ActiveRecord::Schema.define(version: 2021_05_27_024159) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "balance", default: 200.0
-    t.string "name"
     t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
