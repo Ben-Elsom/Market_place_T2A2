@@ -1,11 +1,3 @@
-I would like to make an app where users can post questions and other users can give responses to that question. It costs $2 to post a question and 10c to post a comment. 
-
-The $2 (minimum) for creating the question and the 10c for adding a comment will be added to a pool of money for that question.
-At the end of a set period of time the question will close and the most liked comment will receive the pool of money that has been collected for the question. 
-
-When starting a question I would like for the user to choose how high the entry for the response should be (from 10c to say $5 depending on how complex the of an answer they are expecting). They should also be able to set how much of a prize/price they would like to set on this question (higher would obviously attract more responses) 
-
-
 #### Identification of the problem you are trying to solve by building this particular marketplace app.
 
 Coming up with good ideas is hard. All industries and classes of people (Professional, casual, student) need to come up with unique, innovative or plain just good ideas for whatever it is they are doing.
@@ -30,9 +22,19 @@ https://idealab2.herokuapp.com/
 #### link to github 
 https://github.com/Ben-Elsom/Market_place_T2A2
 
-#### description of market place app 
-##### purpose 
-The purpose of my app is to help it's users come up with the best answer or just ideas for whatever it may be that they are pondering in their life/business.
+#### Description of market place app
+My application is a idea generating system that allows users to post questions and then allows other users to post comments to those questions. Users can then give comments likes to signify that they believe that a comment is good. The question maker will set how long they want to give users to be able to answer the question for and after that no more comments will be accepted 
+
+The difference of my app is that when generating a question, the question maker has to put up a prize from their own money that will be displayed along side the question it's self.  At the end of the questions "Open time" the comment with the most likes will be sent the pool of prize money. 
+
+However, when a user makes a comment they must also pay the response cost set by the question maker. When a comment is made and the response cost is payed, that amount of money is then added to the prize for that question. Meaning the more responses there are to a question the more the prize pool will increase and the more responders will be drawn to the question. 
+
+In the event of a tie when a question closes and two or more questions have the same number of likes the creator of a question will be displayed the top responses and will get to chose which comment deserves to win the prize. 
+
+Users start with $200 and the only way to make more money is to win it. Good luck!
+
+##### Purpose 
+The purpose of my app is to help it's users come up with the best answer or just ideas for whatever it may be that they are pondering in their life/business. My app allows incourages higher quality answers and less low quality answers through the use of the prize and response cost system. 
 
 ##### Features
 - Autherization - log in and sign up allows users to have their own personal account, balance and username.
@@ -44,15 +46,9 @@ The purpose of my app is to help it's users come up with the best answer or just
 
 - Ability to like and unlike comments - If the user is not the question owner then they will have the ability to like response on a questions show page. This can only be done once and then the button for that question is changed to an unlike button which if the user clicks it will delete their like on that response.
 
+- Ability to break a tie with the use of a tie breaker page. 
 
-
-- Ability to make questions with a headlining question, description of that question, set the prize, set the response cost, set the time it will close and upload an image for further explaination
-- Ability to make response to questions 
-- Ability to unlike comments 
-- 
-- 
-
-##### Target audience NEED HELP ON THIS
+##### Target audience 
 The target audience for my app on the questions side are people aged between 20-35 who have a moderate amount of skill in an field who will be able to make something from the ideas they are given and such will be willing to spend money to be able to receive these ideas. 
 On the response side it is any one who has some amount of expendable income that they are willing to be gamble on a response to a question. These users will most likely be older and well educated as they will have more expendable income and a belief that the ideas they can come up with are well thought out. 
 
@@ -71,30 +67,8 @@ https://trello.com/b/baNUCtjg/market-place-assignment
 
 #### Sitemap
 
-DATA STRUCTURE
-Question has many comments, users. Has one owner 
--	Prize 
--	Closing time 
--	Owner 
--	Title 
--	Description 
--	Response cost 
--	ID
-User 
--	Username 
--	Password 
--	Account balance 
--	Total winnings 
-Comment has one question, owner 
--	Question 
--	Owner 
--	Body 
--	Number of Likes
-Like has one user, comment
--	Owner 
--	comment
 
-#### Describe the way tasks are allocated and tracked in your project
+#### Describe the way tasks are allocated and tracked in your project DONE
 In my project I am using a trello board to track the tasks that need to be completed for this assignment. 
 
 Each card in my trello board is built around a user story and the steps that I will need to complete to make that user story a reality are listed in a checklist inside that card. This checklist also includes things like adding validation or other checks that I will need to perform to ensure that the user can complete their user story with no errors.
@@ -115,7 +89,7 @@ The columns I have are
 
 At the start of my project I will work on the tasks that are in the MVP column and then work my way down to "important" and then if I have time "Nice to have" 
 
-The column MVP are for things that I have to have done to have my app working at even the most basic level. This included things like; ability to make question, ability to make comments, ability to log in ect. I did not include things like building the like button in here as while that is definitely something I want to have in my final project , the app can function at the some basic level without it and just be a questions and answers site. 
+The column MVP are for things that I have to have done to have my app working at even the most basic level. This included things like; ability to make question, ability to make comments, ability to log in ect. I did not include things like building the like button in here as while that is definitely something I want to have in my final project, the app can function at the some basic level without it and just be a questions and answers site. 
 
 Then the column important is for parts of the project that are needed for my project to meet my vision on how I would like my application to function. However, if i did not have these features the application would still function at it's most basic level and would meet the definition of a market place app. In here I had things like; build like feature, award money to the most liked comment, take the defined amount of money from a users account when they make a comment. 
 

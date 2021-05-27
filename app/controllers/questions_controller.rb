@@ -92,8 +92,8 @@ class QuestionsController < ApplicationController
         end
     end
 
-    def rules 
-        
+    def about
+
     end
 
     private
