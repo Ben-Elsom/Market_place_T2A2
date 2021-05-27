@@ -33,22 +33,39 @@
     <% end %>
 <% end %>
 <hr>
-<% @comments.each do |comment| %>
-    <span> Posted by: <strong><%= truncate(comment.user.username, :length => 100)%></strong></span>
-    <p><%= comment.body %></p>
-   <%= pluralize(comment.likes.count, "like")%>
-    <% if user_signed_in? && @question.user_id != current_user.id && @question.active %>
-        <% if comment.liked?(current_user) %>
-            <%= button_to "Unlike", like_path(comment), method: :delete%>
-        <% else %>
-            <%= button_to "Like", like_path(comment), method: :post%>
-        <% end %>
+    <% @comments.each do |comment| %>
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+            <h5 class="card-title">Posted by: <%= comment.user.username%></h5>
+            <p class="card-text"><%= comment.body %></p>
+            <p class="card-text"><%= pluralize(comment.likes.count, "like")%></p>
+            <% if user_signed_in? && @question.user_id != current_user.id && @question.active %>
+                <% if comment.liked?(current_user) %>
+                    <%= button_to "Unlike", like_path(comment), method: :delete, class:"btn btn-primary" %>
+                <% else %>
+                    <%= button_to "like", like_path(comment), method: :post, class:"btn btn-primary" %>
+                <% end %>
+            <% end %>
+            <% if policy(Comment).destroy? %>
+                <h5><%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure you would like to delete this comment?"}%></h5>
+            <% end %>
+        </div>
+    </div>
     <% end %>
-    <% if policy(Comment).destroy? %>
-        <h5><%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure you would like to delete this comment?"}%></h5>
-    <% end %>
-    <hr>
-<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <% if @question.comments.count == 0 && @question.active %>
     <h1>🐶</h1>
     <h3>Wow, such empty </h3>
