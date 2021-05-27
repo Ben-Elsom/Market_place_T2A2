@@ -20,7 +20,7 @@
 <% if policy(Question).destroy? %>
     <p><%= link_to "Delete Question", question_path(@question), method: :delete, data: {confirm: "Are you sure you would like to delete this question?"} %></p>
 <% end %>
-<% if policy(@question).edit? %>
+<% if policy(@question).edit? && @question.active %>
     <p><%= link_to "Edit Question", edit_question_path(@question) %></p>
 <% end %>
 

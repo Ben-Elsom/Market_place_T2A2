@@ -1,21 +1,20 @@
 #### Identification of the problem you are trying to solve by building this particular marketplace app.
 
 Coming up with good ideas is hard. All industries and classes of people (Professional, casual, student) need to come up with unique, innovative or plain just good ideas for whatever it is they are doing.
-I want to help these people with the issue i have seen people facing, coming up with good ideas is hard. 
+I want to help these people with this issue I often have seen people facing, and have face myseld coming up with good ideas is hard. 
 
-My app Idealab is a new idea generating tool that allows users to harness the power of numbers while minimizing the draw backs
+There are casual services that can help people generate ideas but they are either not specific enough (name generators), have lots of low quality answers (Ask reddit, Instagram polls) or just do not have enough diversity/chances to get lucky with a good idea (business brainstorming sessions)
 
-There are casual services that can help people generate ideas but they are either not specific enough (name generators) or have lots of low quality answers (Ask reddit, Instagram polls).
-
-My app “Idea Lab” is a brainstorming website with prizes for the best ideas and barriers to entry for responses so that only ideas that creators believe are decent will be posted. This will allow for a better idea generating service then anything that is currently available on the internet. 
+My app “Idea Lab” is a brainstorming website with prizes for the best ideas and barriers to entry for responses so that only ideas that creators believe are good will be posted. This will allow for a better idea generating service then anything that is currently available on the internet. 
+Idea lab allows it users to harness the power of numbers while minimizing the draw backs.
 
 
 #### Why is it a problem
-Individuals can be delayed from action purely because they just do not have something that they believe is a good idea to work on. This reduces the amout of time that that individual can spend on actually working on their project. I want to assist people with the first part of any good project which is coming up with a good idea. 
+Individuals can be delayed from action purely because they just do not have something that they believe is a good idea to work on. This reduces the amount of time that an individual can spend on actually working on their project. I want to assist people with the first part of any good project which is coming up with a good idea. 
 
 #### Link to website 
 
-https://idealab2.herokuapp.com/
+https://idealab3.herokuapp.com/
 
 #### link to github 
 https://github.com/Ben-Elsom/Market_place_T2A2
@@ -32,7 +31,7 @@ In the event of a tie when a question closes and two or more questions have the 
 Users start with $200 and the only way to make more money is to win it.
 
 ##### Purpose 
-The purpose of my app is to help it's users come up with the best answer or just ideas for whatever it may be that they are pondering in their life/business. My app allows incourages higher quality answers and less low quality answers through the use of the prize and response cost system. 
+The purpose of my app is to help it's users come up with the best answer or just ideas for whatever it may be that they are pondering in their life/business. My app incourages higher quality answers and less low quality answers through the use of the prize and response cost system. 
 
 ##### Features
 - Autherization - log in and sign up allows users to have their own personal account, balance and username.
@@ -44,31 +43,55 @@ The purpose of my app is to help it's users come up with the best answer or just
 
 - Ability to like and unlike comments - If the user is not the question owner then they will have the ability to like response on a questions show page. This can only be done once and then the button for that question is changed to an unlike button which if the user clicks it will delete their like on that response.
 
-- Ability to break a tie with the use of a tie breaker page. 
+- Ability to break a tie with the use of a tie breaker page. When a question ends and there are two or more comments tied for first place the question is closed but the prize is not given. When the creator of the question returns to the index page they will be prompted to break the tie.
+
+- Banner showing the most recent win to show off other users winning money 
+
+- Ability for the owner of a question to edit their question while it is still active.
+
+#### Sitemap
+![](sitemap.png)
+
 
 ##### Target audience 
 The target audience for my app on the questions side are people aged between 20-35 who have a moderate amount of skill in an field who will be able to make something from the ideas they are given and such will be willing to spend money to be able to receive these ideas. 
+
 On the response side it is any one who has some amount of expendable income that they are willing to be gamble on a response to a question. These users will most likely be older and well educated as they will have more expendable income and a belief that the ideas they can come up with are well thought out. 
 
 
 ##### Tech stack 
 - HTML - This was used on my application to structure, add and occasionally style content to my webpage. It was used for things like making tables, making headings, adding text and bolding text 
-- CSS - This was used to style elements on my website where bootstrap did not do exactly what I wanted. UPDATE THIS
-- Ruby on rails - I used Ruby on rails as the framework for my application. This was used to 
+- CSS - This was used to style elements on my website where bootstrap did not do exactly what I wanted. 
+- Ruby on rails - I used Ruby on rails as the framework for the front and back end of my application. Rails is used to create routes, set up the configuration of the website, control the logic of my application through controllers along with many other smaller functions. Ruby on rails also allows for the use of embedded ruby code which also allowed for the implementation of logic in my views. Ruby on rails allows for the use of gems, the extra gems I used are; 
+- rolify
+- devise
+- simple_form
+- cloudinary
+- activestorage-cloudinary-service
+- dotenv-rails
+- pundit
+
+
 - Heroku - I used Heroku to deploy my application. I set up automatic deployment on my website so that each time I push my code to my github repo "Main" heroku will see the change and will automatically apply the chanegs to my deployed website 
 - Bootstrap - I used bootstrap for the majority of my styling as this is the most efficent way to make my website visually pleasing. 
+- PostgreSQL - The database I used for this project was postgreSQL. Postgres was used to store all of my data except for my images 
 
 
 ##### USER STORYS
-My user stories are stored inside of each of my trello cards. 
+My user stories are stored in the description of each of my trello cards. 
 https://trello.com/b/baNUCtjg/market-place-assignment
 
-#### Sitemap
+
+#### Wireframes 
+
+
+#### ERD
+
+![](ERD.pdf)
 
 
 
-
-#### Describe the way tasks are allocated and tracked in your project DONE
+#### Describe the way tasks are allocated and tracked in your project 
 In my project I am using a trello board to track the tasks that need to be completed for this assignment. 
 
 Each card in my trello board is built around a user story and the steps that I will need to complete to make that user story a reality are listed in a checklist inside that card. This checklist also includes things like adding validation or other checks that I will need to perform to ensure that the user can complete their user story with no errors.
@@ -108,19 +131,30 @@ User - For my application to work each user of the website will need to make an 
 Question - A question is made by a user. A question most contain, a title, a base prize that will be taken from the question makers account balance, a response cost that will be taken from the users account balance when they make a comment and added to the prize and a closing date and time where the question winner will be decided and no more comments will be able to be added. The question maker also has the option of adding a more in depth question description to give the responders more background information as well as the option to add a explaination photo which can also be used to provide further context.
 At the end of a question when the winner is being decided, Idealab will check the question to see if there is a clear winner, if there is not then the price will not be given. The next time the creator of that question logs on they will be prompted to give the tie breaking like between all of the comments that have the same number of likes. Then the program will attempt to create a winner and now the tie is broken and so the comment that the question owner liked will have the most and will be awarded the prize pool. 
 
-
 Comment - A comment (aka response) is what another user can make to a question to add themselves into the running to win the prize. The cost of the response will vary depending on the question as this amount is decided by the question maker at the creation of the question (higher response cost will mean less responses but likely higher quality and vise versa). The comments are displayed on the show page for a question in order of most to least likes. Comments are also created on the show page for a question. Users cannot edit or delete their comments once they are made however an admin account has the ability to delete any comment with no refund. 
 
 Like - A like is a free token that users can give to other users comments to signify that they like the comment. A user can only give one like to to a comments but can give as many comments a like as they want. Users can also like their own comments. Users also have the ability to remove their like from a comment at any time while the question is still active. Likes are used to decide the best response at the end of the questions active time. The creator of the question cannot like any comments on their own post as they are the deciding vote in the event of a tie. 
 
+Most recent win - The most recent win is a single entry table that that is updated each time a questions prize is given. This most recent win table is copy of the
+- Questions title 
+- Questions prize 
+- Comments body 
+- Comment owners username
+
+Originally I just had this as just a reference to the comments ID as to avoid data duplication however I realised that each time the ruby wanted to display this information it would have to search all comments just to find the comment with that ID which is inefficient as it is just these fields that I want to display. So I edited to table to be 4 fields that are the same data type as the information columns they are pulled from. This data is then displayed at the top of the index page as a reminder to the users of the money that can be won.
+
+Roles - In my application there is just one role defined, Admin. An admin account has the ability to delete comments and questions. This allows for maintenance of the site from any undesirable comments or questions. 
+
+
 #### Detail any third party services that your app will use
-I did not use many 3rd party services in my application as it was not necessary and/or a smart use of my time. The only 3rd part service I used was Heroku
+I did not use many 3rd party services in my application as it was not necessary and/or a smart use of my time. However the 3rd party services I did use were
 
-Heroku - My application uses the free version of Heroku for deployment. Heroku allows for speedy deployment of an application as it allows the developer to use ready made environments to deploy your code. This worked for my me as we only had a short time to create the application and using AWS can be confusing and complicated for a newer programmer like myself. Heroku hosts the web applications code and database. The code on heroku can be updated by updating the code in Ben Elsom's, Marketplace Assignment repo, Main branch. The database can only be updated by a user on the website making a post or delete request on the deployed website or the application owner by using the command "Heroku run rails c" in their terminal.
+Heroku - My application uses the free version of Heroku for deployment. Heroku allows for speedy deployment of an application as it allows the developer to use ready made environments to deploy their code on. This worked for me as we only had a short time to create the application and using AWS can more complicated for a newer programmer like myself. Heroku hosts the web applications code and database. The code on heroku can be updated by updating the code in Ben Elsom's, Marketplace Assignment repo, Main branch. Heroku then will see that the branch has been updated and will automaticly update the deployed version. The database can only be updated by a user on the website making a post or delete request on the deployed website or the application owner by using the command "Heroku run rails c" in their terminal.
 
-Cloundinary - Cloudinary is used to store and deliver the images on my web application. When creating a question, users can upload an image that provides further context to their question, this is then displayed on the show page for that question. Cloudinary allows me with a location to store these images for free. Cloudinary is very useful for website development as it has a built in downsizing tool that means that when a website requests an image in the HTML, if that HTML specifies how large the image will be on the webpage, cloudinary will downsize the image to that size and then send it. This allows for faster webpage loading and less time the developer needs to spend resizing images or storing multiple versions of an image based on how large it will be on each page. 
+Cloundinary - Cloudinary is used to store and deliver the images on my web application. When creating a question, users can upload an image that provides further context to their question, this is then displayed on the show page for that question. Cloudinary provides me with a location to store these images for free. Cloudinary is very useful for website development as it has a built in downsizing tool that means that when a website requests an image in the HTML, if that HTML specifies how large the image will be on the webpage, cloudinary will downsize the image to that size and then send it. This allows for faster webpage loading and less time the developer needs to spend resizing images or storing multiple versions of an image based on how large it will be on each page. 
 
 Bootstrap - I used bootstrap to style my webpage. I have links in my application html that connect to the bootstrap service/stylesheets that allows me (the developer) to add classes to elements in my view which then grabs the relevant styling from the bootstrap style sheets and applies it to the webpage. Bootstrap is a very helpful service as it allows for developers to quickly add styling to a website, make it responsive and in my case mean the website looks better than if I had done it myself.
+
 
 #### Describe your projects models in terms of the relationships (active record associations) they have with each other
 R17 
