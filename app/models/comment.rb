@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   has_many :likes, dependent: :destroy
   belongs_to :user
   validate :has_enough_funds?
-  has_one :most_recent_win
+
 
   
 

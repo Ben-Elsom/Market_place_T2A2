@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
         if !questions_that_need_tie_breaking.empty? 
             redirect_to tie_breaker_path(questions_that_need_tie_breaking[0].id)
         end
-        @questions = Question.where(active: true)
+        @questions = Question.where(active: true).sort_by{|question| question.prize}.reverse
         @most_recent_win = MostRecentWin.last
     end
 
@@ -163,7 +163,7 @@ class QuestionsController < ApplicationController
                     winning_user.save
                     question.prize_given = true
                     question.save
-                    MostRecentWin.create(question: question, comment: winning_comment)
+                    MostRecentWin.last.update(title: question.title, comment: winning_comment.body, user: winning_user.username, prize: question.prize)
                 end
             end
         end

@@ -11,7 +11,7 @@ date6 = DateTime.now + 6.day
 user = User.create(email: "admin@a.com", username: "Ben Elsom", password: "123456", balance: 10000)
 user.add_role :admin
 user.save
-user2 = User.create(email: "user@a.com", username: "User", password: "123456", balance: 200)
+user2 = User.create(email: "user@a.com", username: "Tim Moss", password: "123456", balance: 200)
 
 question1 = Question.create!(title:"What should I call my speedy flower delivery service?", description: "So the idea is that you will request flowers to be sent to an address and we will deliver the flowers within the hour with your custom message.", prize: 50, response_cost: 20, closing_date_and_time: date, user: user)
 
@@ -20,6 +20,7 @@ comment = Comment.create(body: "I think you should call it 'fast flowers'", ques
 Comment.create(body: "'Real quick roses'", question: question1, user: user2)
 Comment.create(body: "'Speedy spuds'", question: question1, user: user2)
 Like.create(user: user, comment: comment)
+MostRecentWin.create(title: question1.title, comment: comment.body, user: user2.username, prize: question1.prize)
 
 question2 = Question.create(title:"What should I do for a hobby", description: " I am a 19 year old boy who has too much free time and want to know what would be the best hobby for me to get into. I want to impress girls and hopefully be able to earn money off of it one day. ", prize: 100, response_cost: 10, closing_date_and_time: date2, user: user)
 

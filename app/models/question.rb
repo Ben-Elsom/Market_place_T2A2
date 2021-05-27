@@ -11,7 +11,7 @@ class Question < ApplicationRecord
     belongs_to :user
     validate :has_enough_funds?
     validate :date_is_in_future?, :unless => :exists?
-    has_one :most_recent_win
+
 
 
     def exists?

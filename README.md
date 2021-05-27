@@ -141,32 +141,43 @@ a question belongs to a user, this means that to create a question there would h
 A question has many comments. This infers that a question could exist without any comments as it is not dependent on them comments. This makes sense for my application as when any question is created it will start out with 0 comments. This has many relationship allows us to find information on a questions comments just by chaining .comments on to the end of a defined Question instance to return all of the information on all of the comments reference that question (foregin key). 
 
 HAS ONE ATTACHTED 
-
-HAS ONE :MOST RECENT WIN
+A question has one explaination photo attached. This means that there can only ever be one explanation photo attached to a question at a time. The question can access the explaination photo through the question element.
 
 Comments 
-- has_many :likes, dependent: :destroy
+- has_many :likes
 - belongs_to :question
 - belongs_to :user
-- has_one :most_recent_win
 
-A comment has many likes meaning a comment could exist without any likes 
+A comment has many likes meaning a comment meaning that the likes table refernces the comments primary key on it. This allows the liked to know which comment it attatches to. This side of the relationship allows for the comments to know about the likes that refer to it. I use this on my application to give a count of the likes that a comment has. 
+The comment has a dependent destroy clause on the likes relationship meaning that if a comment is delete any likes that reference it must also be destroy. This is to avoid having any orphaned records. 
+
+A comment belongs to a question meaning that it has a foreign key from the question model. This allows the comment to have knowledge of what question it is connected to. This is used in my application to display all of the comments that are on a question when the user is on a question show page
+
+A comment belongs to a user which means a comment has a foregin key from the user model. This allows the comment to have information on the user which created it. In my application this is used to that if a comment is decided as the winner it will know who the owner of that comment is so it can tell who to give the money to. 
 
 
 Likes
 - belongs_to :user
 - belongs_to :comment
 
+A like belongs to a user which means a like has a foregin key from the user model. This allows the like to have information on the user which created it. In my application is is used to ensure that a user can only like a comment once. 
+
+Likes also belongs to a comment which means that it holds a foreign key of a comment. This allows the like to know which comment is attachted to. This is used in my application to define which comment a like is on.
+
 Most Recent win 
-- belongs_to :question
-- belongs_to :comment
+
+Most recent win is a table in my database but does not have any relations. I originally had it as a foreign key connecting to the comment however I realized this was inefficient as ruby would have to search all of the commments, active and inactive, just to find the specific comment when all I wanted to do was to display 4 pieces of data. 
 
 User 
 - has_many :likes, dependent: :destroy
 - has_many :questions, dependent: :destroy
 - has_many :comments, dependent: :destroy
 
+A user has many likes. This allows the user to have knowledge of all of their likes. In my application this is made so that I can have the dependent destroy clause, meaning that if a user is destroyed then all of it's comments must be destroyed to avoid having any orphaned records 
 
+A user has many questions, this is to give the user information on all of the questions that they have created. This is used in my application to check if any of the questions that a user owns needs to be tie broken. This allows for simpler code to find this out. It also allows for the dependent destroy clause. 
+
+A user also has many comments. This allows the user to know of all of their comments. This is used in my application to allow for the dependent destroy clause.
 
 R18 
 A relation is a table and realtionships between them. one to one one to many 
@@ -185,13 +196,12 @@ In my application a question can only ever have one user (owner/creator). In the
 Has zero or many comments 
 When a comment is made, it references the question it is being added to in it's column "Question_id". This reference allows us to create a relationship between the two. From the questions point of view it can check if any one the comments reference it in it's quesion_id column and if so it know that the comment is a comment on it's self. The foregin key is held in the comment because a question can exist without a comment but the comment cannot exist without the question. 
 
-
-DOES THIS HAVE ONE MOST RECENT WIN
+A question has 0 or 1 explanation photo attached. The question has information about what the explaination photo is however this is a one way relationship as the explaination photo does not need to have information on what question it is attatched to. 
 
 - belongs_to :user
 - has_many :comments
 - has_one_attached :explaination_photo 
-- has_one :most_recent_win
+
 
 
 Comments 
@@ -204,10 +214,6 @@ A comment references a questions foregin key in its column "question_id" meaning
 - 1 and only one user 
 A comment also references who the creator/user is by including their primary key as a foreign key. This allows the database to know who made the comment 
 
-- has_one :most_recent_win
-
-
-DOES THIS HAVE ONE MOST RECENT WIN??
 
 Likes
 - belongs_to :user
@@ -219,12 +225,12 @@ A like is created by adding an entry to the likes table with two crucial pieces 
 Has 1 and only 1 comment
 Each likes also reference a comment by it's primary key. This also means that a comment cannot exist without a comment and so belongs to that comment 
 
-Most Recent win 
-
-Has one and only one comment 
-
 User 
 has 0 or many questions 
+
 has 0 or many comments
 has 0 or many likes
+
+
+Role 
 
